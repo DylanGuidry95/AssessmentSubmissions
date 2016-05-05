@@ -30,12 +30,14 @@ namespace AssessmentSubmissions
     {
         string Name { get; set; }
         string FeedBackForm { get; set; }
+        ArrayList Requirements { get; set; }
         Grades Grade { get; set; }
     }
 
     public interface IClass
     {
         ArrayList Students { get; set; }
+        ArrayList AllAssignments { get; set; }
         void AddStudent(IStudents s);
     }
 

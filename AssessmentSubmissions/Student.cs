@@ -99,7 +99,7 @@ namespace AssessmentSubmissions
         public class YearOne : IClass
         {
             private ArrayList m_students; //List of studetns in the class
-        
+            private ArrayList m_assignments; //List of assignments for the class
             /// <summary>
             /// Contrustor used to create a new instance of a year two class
             /// </summary>
@@ -117,6 +117,12 @@ namespace AssessmentSubmissions
             {
                 get { return m_students; } //returns the value of m_students
                 set { m_students = value; } //sets the value of m_students to the value of Students
+            }
+
+            public ArrayList AllAssignments
+            {
+                get { return m_assignments; }
+                set { m_assignments = value; }
             }
 
             /// <summary>
@@ -138,7 +144,7 @@ namespace AssessmentSubmissions
         public class YearTwo : IClass
         {
             private ArrayList m_students; //List of studetns in the class
-
+            private ArrayList m_assignments; //List of assignments for the class
             /// <summary>
             /// Contrustor used to create a new instance of a year two class
             /// </summary>
@@ -156,6 +162,12 @@ namespace AssessmentSubmissions
             {
                 get { return m_students; } //returns the value of m_students
                 set { m_students = value; } //sets the value of m_students to the value of Students
+            }
+
+            public ArrayList AllAssignments
+            {
+                get { return m_assignments; }
+                set { m_assignments = value; }
             }
 
             /// <summary>
@@ -193,8 +205,21 @@ namespace AssessmentSubmissions
     [Serializable]
     public class Assignment : IAssignment
     {
+        public class AssignementRequirements
+        {
+            public string Description;
+            public string Definition;
+            public bool Verdict;
+            public AssignementRequirements(string des, string def)
+            {
+                Description = des;
+                Definition = def;
+            }
+        }
+
         private string m_assignmentName; //Name of the assignment
         private string m_formAddress; //Location the form is located at for retrival
+        private ArrayList m_requirements;
         private Grades m_grade; //Grade student earned on assessment
 
         /// <summary>
@@ -228,6 +253,18 @@ namespace AssessmentSubmissions
         {
             get { return m_formAddress; } //returns the value of m_formAddress
             set { m_formAddress = value; } //sets the value of m_formAddress to the value of FeedBackForm
+        }
+
+        public ArrayList Requirements
+        {
+            get { return m_requirements; }
+            set { m_requirements = value; }
+        }
+
+        public void CreateRequirement(string des, string def)
+        {
+            AssignementRequirements a = new AssignementRequirements(des, def);
+            m_requirements.Add(a);
         }
 
         /// <summary>

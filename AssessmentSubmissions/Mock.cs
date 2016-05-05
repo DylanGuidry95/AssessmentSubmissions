@@ -18,7 +18,6 @@ namespace AssessmentSubmissions
             Main.ClassInfo = this;
             Main.ClassInfo.Activate();
             Main.HomeScreen.Close();
-            textBox1.Text = Main.ActiveClass;
         }
 
         private void StudentNames_MouseDown(object sender, MouseEventArgs e)
@@ -49,10 +48,13 @@ namespace AssessmentSubmissions
 
         private void StudentNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-           foreach(IStudents s in Main.CurrentClass.Students)
+           foreach(StudentFactory.Student s in Main.CurrentClass.Students)
             {
                 if (StudentNames.Text == s.Name)
+                {
                     SetInfo(s.Name, s.GitHub, s.Website);
+                    Main.CurrentStudent = s;
+                }
             }
         }
 
@@ -66,6 +68,46 @@ namespace AssessmentSubmissions
         private void button1_Click(object sender, EventArgs e)
         {
             SaveLoad<SchoolFactory.YearOne>.Serialize("YearOne", Main.CurrentClass);
+        }
+
+        private void editStudent_Click(object sender, EventArgs e)
+        {
+            Main.StudentEdit = new EditStudent();
+            Main.StudentEdit.Show();
+        }
+
+        private void AssignmentEditor_Click(object sender, EventArgs e)
+        {
+            AssignmentCreation a = new AssignmentCreation();
+            Main.AssignmentCreate = a;
+            Main.AssignmentCreate.Show();
+        }
+
+        public void UpdateAssignments()
+        {
+            foreach(StudentFactory.Student s in Main.CurrentClass.Students)
+            {
+                foreach (Assignment a in Main.CurrentClass.AllAssignments)
+                {
+                    if(!s.Assignments.Contains(a))
+                    {
+                        s.Assignments.Add(a);
+                    }
+                }
+            }
+        }
+
+        private void GenerateAssignmentLog()
+        {
+            assignmentLog.Rows.Clear();
+            assignmentLog.Refresh();
+            foreach (Assignment a in Main.CurrentStudent.Assignments)
+            {
+                assignmentLog.Rows.Add();
+                assignmentLog.Rows[assignmentLog.Rows.Count].Cells[0].Value = a.Name;
+                assignmentLog.Rows[assignmentLog.Rows.Count].Cells[1].Value = a.Grade;
+                assignmentLog.Rows[assignmentLog.Rows.Count].Cells[0].Value = a.FeedBackForm;
+            }
         }
     }
 }
