@@ -30,21 +30,11 @@ namespace AssessmentSubmissions
         {
             string[] splitData = Data.Text.Split('\n');
             File.WriteAllText(Directory.GetCurrentDirectory() + "/" + fileName + ".txt", "");
-            foreach(string s in splitData)
+            foreach (string s in splitData)
             {
                 string save = CheckUrl(s);
                 File.AppendAllText(Directory.GetCurrentDirectory() + "/" + fileName + ".txt", save + "\n");
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SaveInformation("Test");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            LoadInformation("Test");
         }
 
         string CheckUrl(string s)
