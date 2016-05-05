@@ -39,7 +39,7 @@
             this.Control = new System.Windows.Forms.GroupBox();
             this.Help = new System.Windows.Forms.Button();
             this.AssessmentCreate = new System.Windows.Forms.Button();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).BeginInit();
             this.Control.SuspendLayout();
@@ -64,8 +64,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Assignment,
             this.Grade,
-            this.Download,
-            this.nameDataGridViewTextBoxColumn});
+            this.Download});
             this.dataGridView1.DataSource = this.studentBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(139, 74);
             this.dataGridView1.Name = "dataGridView1";
@@ -88,10 +87,6 @@
             this.Download.HeaderText = "Download Url";
             this.Download.Name = "Download";
             this.Download.ReadOnly = true;
-            // 
-            // studentBindingSource
-            // 
-            this.studentBindingSource.DataSource = typeof(AssessmentSubmissions.Student);
             // 
             // studentInfo
             // 
@@ -132,18 +127,19 @@
             this.AssessmentCreate.Text = "New Assignment";
             this.AssessmentCreate.UseVisualStyleBackColor = true;
             // 
-            // nameDataGridViewTextBoxColumn
+            // textBox1
             // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.textBox1.Location = new System.Drawing.Point(457, 29);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 4;
             // 
             // Mock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(750, 500);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Control);
             this.Controls.Add(this.studentInfo);
             this.Controls.Add(this.dataGridView1);
@@ -154,6 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).EndInit();
             this.Control.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -170,5 +167,6 @@
         private System.Windows.Forms.Button Help;
         private System.Windows.Forms.Button AssessmentCreate;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

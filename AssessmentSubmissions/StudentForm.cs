@@ -12,16 +12,14 @@ namespace AssessmentSubmissions
 {
     public partial class StudentForm : Form
     {
-        Mock Parent;
-        public StudentForm(Mock p)
+        public StudentForm()
         {
             InitializeComponent();
-            Parent = p;
+            Main.StudentCreation = this;
         }
 
         private void addStudent_Click(object sender, EventArgs e)
         {
-            Parent.AddStudents(new Student(studentName.Text, githubName.Text, webUrl.Text));
             this.Close();
         }
     }
