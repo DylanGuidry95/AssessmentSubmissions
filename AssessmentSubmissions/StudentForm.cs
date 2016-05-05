@@ -13,7 +13,6 @@ namespace AssessmentSubmissions
     public partial class StudentForm : Form
     {
         Mock Parent;
-
         public StudentForm(Mock p)
         {
             InitializeComponent();

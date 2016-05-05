@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssessmentSubmissions
 {
+    [Serializable]
     public class Assignement
     {
         public enum Grades
@@ -45,6 +46,7 @@ namespace AssessmentSubmissions
         }
     }
 
+    [Serializable]
     public class Student
     {
         private string m_name;
@@ -61,14 +63,39 @@ namespace AssessmentSubmissions
         public string Name
         {
             get { return m_name; }
+            set { m_name = value; }
         }
         public string GitHub
         {
             get { return m_gitUser; }
+            set { m_gitUser = value; }
         }
         public string Website
         {
             get { return m_website; }
+            set { m_website = value; }
+        }
+    }
+
+    [Serializable]
+    public class ClassYear
+    {
+        private List<Student> m_enrolledStudents;
+        private List<Assignement> m_classAssignments;
+        private string m_className;
+        public ClassYear(string n)
+        {
+            m_className = n;
+        }
+        public List<Student>EnrolledStudents
+        {
+            get { return m_enrolledStudents; }
+            set { m_enrolledStudents = value; }
+        }
+        public List<Assignement>ClassAssignments
+        {
+            get { return m_classAssignments; }
+            set { m_classAssignments = value; }
         }
     }
 }
