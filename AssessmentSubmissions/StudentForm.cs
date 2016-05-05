@@ -15,11 +15,12 @@ namespace AssessmentSubmissions
         public StudentForm()
         {
             InitializeComponent();
-            Main.StudentCreation = this;
         }
 
         private void addStudent_Click(object sender, EventArgs e)
         {
+            Main.CurrentClass.AddStudent(Main.student.Create(studentName.Text));
+            Main.ClassInfo.UpdateClassList();
             this.Close();
         }
     }

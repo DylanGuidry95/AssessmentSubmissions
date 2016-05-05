@@ -13,5 +13,11 @@ namespace AssessmentSubmissions
         public static StudentForm StudentCreation; //refrence to the create student form of the app
 
         public static SchoolFactory school = new SchoolFactory(); //refrence to the SchoolFactory class
+
+        public static StudentFactory student = new StudentFactory(); //refrence to the StudentFactory class
+
+        public static SchoolFactory.YearOne CurrentClass;
+
+        public static string ActiveClass;
     }
 }

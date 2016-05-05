@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Soap;
 using System.Xml.Serialization;
 using System.IO;
 using System.Collections;
@@ -33,13 +34,10 @@ namespace AssessmentSubmissions
         /// <param name="t">Data we are passing in to be serialized</param>
         public static void Serialize(string s, T t)
         {
-            using (FileStream fs = File.Create(Program.SaveDirectory + s + ".xml")) //Creates a FileStream using information from the file we created
+            using (FileStream fs = File.Create(Program.SaveDirectory + "/" + s + ".xml")) //Creates a FileStream using information from the file we created
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(T)); //Creates a new BinaryFormatter to give us access to the Serialize function
+                SoapFormatter serializer = new SoapFormatter(); //Creates a new XMLSerializer to give us access to the Serialize function
                 //We call the Serialize method and pass in the FileStream we created and the data inside of the object we passed into the function
-                //When the data is being serialized it is being wrote into the created file in the form of bits and bytes there for if you open up the
-                //file it is not human readable with the exception of the variables we declared.
-                //To have the file in a human readable form we would use the SoapFormatter method
                 serializer.Serialize(fs, t);
                 fs.Close(); //Allways close your files when you are done using them
             }
@@ -59,7 +57,7 @@ namespace AssessmentSubmissions
             T t; //We will use the as the return value
             using (FileStream fs = File.OpenRead(s)) //Same process as Serialize but instead of create we use OpenRead
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(T)); //Creates a new binaryFormatter that will give us access to the Deseralize function
+                SoapFormatter deserializer = new SoapFormatter(); //Creates a new XMlSeializer that will give us access to the Deseralize function
                 //We then call the Deserialize method and give it the arguments of the FileStream we created that contains all the data inside of the file
                 //we opened and are reading from.
                 //We take all this information and cast it as the return type and then set the variable we created at the head of the function equal to the

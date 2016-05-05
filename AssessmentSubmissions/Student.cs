@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace AssessmentSubmissions
 {
-    class StudentFactory : IStudentFactory
+    [Serializable]
+    public class StudentFactory : IStudentFactory
     {
-        class Student : IStudents
+        [Serializable]
+        public class Student : IStudents
         {
             private string m_name;                          //Name of the student
 
@@ -16,7 +20,7 @@ namespace AssessmentSubmissions
 
             private string m_website;                       //Website URL the student uses to show his/her work on the web
 
-            List<IAssignment> m_assignment;                 //List of assignments the student is responsible to complete 
+            ArrayList m_assignment;                 //List of assignments the student is responsible to complete 
                                                             //thorugh out his/her time at AIE
             /// <summary>
             /// Constructor for object of type student
@@ -26,14 +30,16 @@ namespace AssessmentSubmissions
             /// associated with that student.
             /// </summary>
             /// <param name="n">Value that will be assigned to the variable m_name</param>
-            public Student(string n) { m_name = n; }  
-            
+            public Student(string n) { m_name = n; }
+
+            public Student() { }
+
             /// <summary>
             /// Property that is being implemented from the IStudents interface.
             /// This will be used by out side classes to get the values and add
             /// to the list of assignments the student has had assigned to them.
             /// </summary>      
-            public List<IAssignment> Assignments
+            public ArrayList Assignments
             {
                 get { return m_assignment; } //Gets the value of m_assignment and returns it
                 set { m_assignment = value; } //Changes the value of m_assignement to the value of Assignments
@@ -86,24 +92,28 @@ namespace AssessmentSubmissions
         }
     }
 
-    class SchoolFactory : ISchoolFactory
+    [Serializable]
+    public class SchoolFactory : ISchoolFactory
     {
-        class YearOne : IClass
+        [Serializable]
+        public class YearOne : IClass
         {
-            IStudentFactory StudentFactory;
-            private List<IStudents> m_students; //List of studetns in the class
-
+            private ArrayList m_students; //List of studetns in the class
+        
             /// <summary>
             /// Contrustor used to create a new instance of a year two class
             /// </summary>
-            public YearOne() { }
+            public YearOne()
+            {
+                m_students = new ArrayList();
+            }
 
             /// <summary>
             /// Property that is being implemented from the IClass interface.
             /// Allows objects from outside this class to modify and retrive the
             /// value assigned to m_students.
             /// </summary>
-            public List<IStudents> Students
+            public ArrayList Students
             {
                 get { return m_students; } //returns the value of m_students
                 set { m_students = value; } //sets the value of m_students to the value of Students
@@ -124,22 +134,25 @@ namespace AssessmentSubmissions
             }
         }
 
-        class YearTwo : IClass
+        [Serializable]
+        public class YearTwo : IClass
         {
-            IStudentFactory StudentFactory;
-            private List<IStudents> m_students; //List of studetns in the class
+            private ArrayList m_students; //List of studetns in the class
 
             /// <summary>
             /// Contrustor used to create a new instance of a year two class
             /// </summary>
-            public YearTwo() { }
+            public YearTwo()
+            {
+                m_students = new ArrayList();
+            }
 
             /// <summary>
             /// Property that is being implemented from the IClass interface.
             /// Allows objects from outside this class to modify and retrive the
             /// value assigned to m_students.
             /// </summary>
-            public List<IStudents> Students
+            public ArrayList Students
             {
                 get { return m_students; } //returns the value of m_students
                 set { m_students = value; } //sets the value of m_students to the value of Students
@@ -165,9 +178,11 @@ namespace AssessmentSubmissions
             switch(n)
             {
                 case "YearOne":
-                    return new YearOne();
+                    Main.CurrentClass = new YearOne();
+                    return Main.CurrentClass;
                 case "YearTwo":
-                    return new YearTwo();
+                    //Main.CurrentClass = new YearTwo();
+                    return Main.CurrentClass;
                 default:
                     break;
             }
@@ -175,7 +190,8 @@ namespace AssessmentSubmissions
         }
     }
 
-    class Assignment : IAssignment
+    [Serializable]
+    public class Assignment : IAssignment
     {
         private string m_assignmentName; //Name of the assignment
         private string m_formAddress; //Location the form is located at for retrival

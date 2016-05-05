@@ -23,6 +23,7 @@ namespace AssessmentSubmissions
             if (className.Text == "YearOne" || className.Text == "YearTwo")
             {
                 Main.school.Create(className.Text);
+                Main.ActiveClass = className.Text;
                 Mock m = new Mock();
                 m.Show();
                 m.Activate();      

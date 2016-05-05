@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,33 +13,33 @@ namespace AssessmentSubmissions
         absent
     }
 
-    interface IStudents
+    public interface IStudents
     {
         string Name { get; set; }
         string GitHub { get; set; }
         string Website { get; set; }
-        List<IAssignment> Assignments { get; set; }
+        ArrayList Assignments { get; set; }
     }
 
-    interface IStudentFactory
+    public interface IStudentFactory
     {
         IStudents Create(string name);
     }
 
-    interface IAssignment
+    public interface IAssignment
     {
         string Name { get; set; }
         string FeedBackForm { get; set; }
         Grades Grade { get; set; }
     }
 
-    interface IClass
+    public interface IClass
     {
-        List<IStudents> Students { get; set; }
+        ArrayList Students { get; set; }
         void AddStudent(IStudents s);
     }
 
-    interface ISchoolFactory
+    public interface ISchoolFactory
     {
         IClass Create(string n);
     }
