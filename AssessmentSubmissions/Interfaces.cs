@@ -50,6 +50,7 @@ namespace AssessmentSubmissions
     public interface ICell
     {
         Form owner { get; set; }
+        TextBox ColHeader { get; set; }
         float PositionX { get; set; }
         float PositionY { get; set; }
         string Data { get; set; }

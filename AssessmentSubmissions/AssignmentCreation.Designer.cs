@@ -36,7 +36,11 @@
             this.editItem = new System.Windows.Forms.RadioButton();
             this.saveItem = new System.Windows.Forms.Button();
             this.discard = new System.Windows.Forms.Button();
+            this.assignementView = new System.Windows.Forms.Panel();
+            this.def = new System.Windows.Forms.TextBox();
+            this.evidence = new System.Windows.Forms.TextBox();
             this.assignmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.assignementView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.assignmentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,6 +51,7 @@
             this.assignmentList.Name = "assignmentList";
             this.assignmentList.Size = new System.Drawing.Size(120, 459);
             this.assignmentList.TabIndex = 0;
+            this.assignmentList.SelectedIndexChanged += new System.EventHandler(this.assignmentList_SelectedIndexChanged);
             // 
             // name
             // 
@@ -107,16 +112,47 @@
             this.discard.UseVisualStyleBackColor = true;
             this.discard.Click += new System.EventHandler(this.discard_Click);
             // 
+            // assignementView
+            // 
+            this.assignementView.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.assignementView.Controls.Add(this.def);
+            this.assignementView.Controls.Add(this.evidence);
+            this.assignementView.Location = new System.Drawing.Point(139, 59);
+            this.assignementView.Name = "assignementView";
+            this.assignementView.Size = new System.Drawing.Size(450, 383);
+            this.assignementView.TabIndex = 8;
+            this.assignementView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.assignementView_MouseClick);
+            // 
+            // def
+            // 
+            this.def.Location = new System.Drawing.Point(110, 4);
+            this.def.Name = "def";
+            this.def.ReadOnly = true;
+            this.def.Size = new System.Drawing.Size(127, 20);
+            this.def.TabIndex = 1;
+            this.def.Text = "Definition of Competence";
+            this.def.SizeChanged += new System.EventHandler(this.def_SizeChanged);
+            // 
+            // evidence
+            // 
+            this.evidence.Location = new System.Drawing.Point(4, 4);
+            this.evidence.Name = "evidence";
+            this.evidence.ReadOnly = true;
+            this.evidence.Size = new System.Drawing.Size(100, 20);
+            this.evidence.TabIndex = 0;
+            this.evidence.Text = "Evidence";
+            this.evidence.SizeChanged += new System.EventHandler(this.evidence_SizeChanged);
+            // 
             // assignmentBindingSource
             // 
             this.assignmentBindingSource.DataSource = typeof(AssessmentSubmissions.Assignment);
-            this.assignmentBindingSource.CurrentChanged += new System.EventHandler(this.assignmentBindingSource_CurrentChanged);
             // 
             // AssignmentCreation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 493);
+            this.Controls.Add(this.assignementView);
             this.Controls.Add(this.discard);
             this.Controls.Add(this.saveItem);
             this.Controls.Add(this.editItem);
@@ -126,6 +162,8 @@
             this.Controls.Add(this.assignmentList);
             this.Name = "AssignmentCreation";
             this.Text = "AssignmentCreation";
+            this.assignementView.ResumeLayout(false);
+            this.assignementView.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.assignmentBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -142,5 +180,8 @@
         private System.Windows.Forms.RadioButton editItem;
         private System.Windows.Forms.Button saveItem;
         private System.Windows.Forms.Button discard;
+        private System.Windows.Forms.Panel assignementView;
+        private System.Windows.Forms.TextBox def;
+        private System.Windows.Forms.TextBox evidence;
     }
 }

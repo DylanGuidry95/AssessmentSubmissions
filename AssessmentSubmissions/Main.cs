@@ -28,25 +28,52 @@ namespace AssessmentSubmissions
 
     public class DataGrid : IGridFactory
     {
+        /// <summary>
+        /// Row object that defines what it means for an object to be an object of type
+        /// Row
+        /// </summary>
         public class Row : IRow
         {
+            /// <summary>
+            /// Cell object that defines what it means to
+            /// be an object of type cell
+            /// </summary>
             class Cell : ICell
             {
                 private float m_xPos, m_yPos;
                 private string m_data;
                 private TextBox m_textBox;
                 private Form m_owner;
+                private TextBox m_colHead; 
+
                 public Cell(float x, float y)
                 {
                     m_xPos = x;
                     m_yPos = y;
                     m_textBox = new TextBox();
+                    m_textBox.TextChanged += M_textBox_TextChanged;
+                    m_textBox.AutoSize = true;
+                }
+
+                private void M_textBox_TextChanged(object sender, EventArgs e)
+                {
+                    if(m_textBox.Width > m_colHead.Width)
+                    {
+                        m_colHead.Width = m_textBox.Width;   
+                    }
+                    m_data = m_textBox.Text;
                 }
 
                 public Form owner
                 {
                     get { return m_owner; }
                     set { m_owner = value; }
+                }
+
+                public TextBox ColHeader
+                {
+                    get { return m_colHead; }
+                    set { m_colHead = value; }
                 }
 
                 public float PositionX
@@ -74,7 +101,7 @@ namespace AssessmentSubmissions
                 }
             }
 
-            public Form owner;
+            public Form formOwner;
 
             public float xPos, yPos;
 
@@ -85,9 +112,9 @@ namespace AssessmentSubmissions
                 m_cells = new List<ICell>();
             }
 
+            float xoffset = 3;
             public void SetCells(ICell c)
             {
-                float xoffset = xPos;
                 c.owner.Controls.Add(c.Textbox);
                 c.PositionX = xoffset;
                 c.PositionY = yPos;
@@ -106,7 +133,7 @@ namespace AssessmentSubmissions
                 for(int i = 0; i < num; i++)
                 {
                     Cell c = new Cell(xPos, yPos);
-                    c.owner = owner;
+                    c.owner = formOwner;
                     m_cells.Add(c);
                 }
                 return null;
@@ -117,11 +144,35 @@ namespace AssessmentSubmissions
         private List<TextBox> m_colheaders;
 
         Panel Grid;
-        Form home;
+        Form formOwner;
+
+        public void AdjustColSize(TextBox t)
+        {
+            if(m_colheaders.Contains(t))
+            {
+                foreach (Row r in m_rows)
+                {
+                    r.Cells[m_colheaders.IndexOf(t)].Textbox.Width = t.Width;
+                }
+            }
+        }
+
+        public void ClearGrid()
+        {
+            foreach (Row r in m_rows)
+            {
+                foreach (ICell cell in r.Cells)
+                {
+                    if(cell.Textbox != null)
+                        Grid.Controls.Remove(cell.Textbox);
+                }
+            }
+        }
 
         public DataGrid(Panel g, Form h)
         {
-            Grid = g; home = h;
+            Grid = g;
+            formOwner = h;
             m_colheaders = new List<TextBox>();
             m_rows = new List<Row>();
         }
@@ -147,7 +198,7 @@ namespace AssessmentSubmissions
             m_colheaders.Add(l);
             l.AutoSize = true;
             l.ReadOnly = true;
-            home.Controls.Add(l);
+            formOwner.Controls.Add(l);
         }
 
         public IRow Create()
@@ -156,13 +207,15 @@ namespace AssessmentSubmissions
             {
                 Row r = new Row();
                 m_rows.Add(r);
-                r.yPos = m_colheaders.First<TextBox>().Location.Y + 26;
-                r.xPos = m_colheaders.First<TextBox>().Location.X;
-                r.owner = home;
+                r.yPos = m_colheaders[0].Location.Y + 26;
+                r.xPos = m_colheaders[0].Location.X;
+                r.formOwner = formOwner;
                 r.Create(m_colheaders.Count());
                 foreach (ICell c in r.Cells)
                 {
                     r.SetCells(c);
+                    c.ColHeader = m_colheaders[r.Cells.IndexOf(c)];
+                    c.Textbox.Width = c.ColHeader.Width;
                     Grid.Controls.Add(c.Textbox);
                 }
                 return r;
@@ -171,13 +224,15 @@ namespace AssessmentSubmissions
             {
                 Row r = new Row();             
                 m_rows.Add(r);
-                r.yPos = m_rows.Last<Row>().yPos + 26;
-                r.xPos = m_colheaders.First<TextBox>().Location.X;
-                r.owner = home;
+                r.yPos = m_rows[m_rows.Count - 2].Cells[0].PositionY + 26;
+                r.xPos = m_colheaders[0].Location.X;
+                r.formOwner = formOwner;
                 r.Create(m_colheaders.Count());
                 foreach(ICell c in r.Cells)
                 {
                     r.SetCells(c);
+                    c.ColHeader = m_colheaders[r.Cells.IndexOf(c)];
+                    c.Textbox.Width = c.ColHeader.Width;
                     Grid.Controls.Add(c.Textbox);
                 }
                 return r;

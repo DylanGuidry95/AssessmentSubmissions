@@ -30,9 +30,16 @@ namespace AssessmentSubmissions
             /// associated with that student.
             /// </summary>
             /// <param name="n">Value that will be assigned to the variable m_name</param>
-            public Student(string n) { m_name = n; }
+            public Student(string n)
+            {
+                m_name = n;
+                m_assignment = new ArrayList();
+            }
 
-            public Student() { }
+            public Student()
+            {
+                m_assignment = new ArrayList();
+            }
 
             /// <summary>
             /// Property that is being implemented from the IStudents interface.
@@ -100,12 +107,14 @@ namespace AssessmentSubmissions
         {
             private ArrayList m_students; //List of studetns in the class
             private ArrayList m_assignments; //List of assignments for the class
+            public string Name = "YearOne";
             /// <summary>
             /// Contrustor used to create a new instance of a year two class
             /// </summary>
             public YearOne()
             {
                 m_students = new ArrayList();
+                m_assignments = new ArrayList();
             }
 
             /// <summary>
@@ -145,12 +154,14 @@ namespace AssessmentSubmissions
         {
             private ArrayList m_students; //List of studetns in the class
             private ArrayList m_assignments; //List of assignments for the class
+            public string Name = "YearTwo";
             /// <summary>
             /// Contrustor used to create a new instance of a year two class
             /// </summary>
             public YearTwo()
             {
                 m_students = new ArrayList();
+                m_assignments = new ArrayList();
             }
 
             /// <summary>
@@ -205,6 +216,7 @@ namespace AssessmentSubmissions
     [Serializable]
     public class Assignment : IAssignment
     {
+        [Serializable]
         public class AssignementRequirements
         {
             public string Description;
@@ -230,8 +242,11 @@ namespace AssessmentSubmissions
         /// <param name="n">Value to be assigned to the value of m_assignmentName</param>
         public Assignment(string n)
         {
+            m_requirements = new ArrayList();
             m_assignmentName = n; //Sets m_assingmentName equal to the value of the argument n
         }
+
+        Assignment() { }
 
         /// <summary>
         /// Property that is being implemented from the IAssignment interface.

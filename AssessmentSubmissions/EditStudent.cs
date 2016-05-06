@@ -35,6 +35,7 @@ namespace AssessmentSubmissions
             else
             {
                 Main.CurrentStudent.Website = infoWebsite.Text;
+                this.Close();
             }
         }
 

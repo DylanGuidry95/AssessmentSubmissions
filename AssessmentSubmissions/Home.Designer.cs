@@ -66,6 +66,7 @@
             this.SelectClass.TabIndex = 2;
             this.SelectClass.Text = "Confirm";
             this.SelectClass.UseVisualStyleBackColor = true;
+            this.SelectClass.Click += new System.EventHandler(this.SelectClass_Click);
             // 
             // groupBox1
             // 

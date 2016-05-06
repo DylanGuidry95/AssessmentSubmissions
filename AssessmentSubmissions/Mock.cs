@@ -20,6 +20,29 @@ namespace AssessmentSubmissions
             Main.ClassInfo = this;
             Main.ClassInfo.Activate();
             Main.HomeScreen.Close();
+            CreateGrid();
+            dg.ClearGrid();
+            GetFiles();
+            UpdateAssignments();
+        }
+
+        private void GetFiles()
+        {
+            foreach (string s in System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory() + "/Students/", "*.xml", System.IO.SearchOption.AllDirectories))
+            {
+                StudentFactory.Student a = SaveLoad<StudentFactory.Student>.Deserialize(s);
+                foreach(StudentFactory.Student student in Main.CurrentClass.Students)
+                {
+                    if(a.Name == student.Name)
+                    {
+                        StudentNames.Items.Add(a.Name);
+                    }
+                }
+            }
+        }
+
+        private void CreateGrid()
+        {
             dg = new DataGrid(studentAssignments, this);
             dg.ColHeaders.Add(colOne);
             dg.ColHeaders.Add(colTwo);
@@ -60,6 +83,10 @@ namespace AssessmentSubmissions
                 {
                     SetInfo(s.Name, s.GitHub, s.Website);
                     Main.CurrentStudent = s;
+                    dg.ClearGrid();
+                    CreateGrid();
+                    UpdateAssignments();
+                    DisplayAssignmentLog();
                 }
             }
         }
@@ -73,7 +100,11 @@ namespace AssessmentSubmissions
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveLoad<SchoolFactory.YearOne>.Serialize("YearOne", Main.CurrentClass);
+            SaveLoad<SchoolFactory.YearOne>.Serialize("/Class/" + Main.CurrentClass.Name, Main.CurrentClass);
+            foreach(StudentFactory.Student s in Main.CurrentClass.Students)
+            {
+                SaveLoad<StudentFactory.Student>.Serialize("/Students/" + s.Name, s);
+            }
         }
 
         private void editStudent_Click(object sender, EventArgs e)
@@ -95,7 +126,15 @@ namespace AssessmentSubmissions
             {
                 foreach (Assignment a in Main.CurrentClass.AllAssignments)
                 {
-                    if(!s.Assignments.Contains(a))
+                    bool exist = false;
+                    foreach (Assignment assign in s.Assignments)
+                    {
+                        if(a.Name == assign.Name)
+                        {
+                            exist = true;
+                        }
+                    }
+                    if (exist == false)
                     {
                         s.Assignments.Add(a);
                     }
@@ -103,9 +142,17 @@ namespace AssessmentSubmissions
             }
         }
 
-        private void GenerateAssignmentLog()
+        private void DisplayAssignmentLog()
         {
-
+            int index = 0;
+            foreach(Assignment a in Main.CurrentStudent.Assignments)
+            {
+                dg.Create();
+                dg.Rows[index].Cells[0].Textbox.Text = a.Name;
+                dg.Rows[index].Cells[1].Textbox.Text = a.Grade.ToString();
+                dg.Rows[index].Cells[2].Textbox.Text = "N/A";
+                index++;
+            }
         }
 
         private void studentAssignments_MouseClick(object sender, MouseEventArgs e)
@@ -114,6 +161,11 @@ namespace AssessmentSubmissions
             {
                 dg.Create();
             }
+        }
+
+        private void Mock_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
