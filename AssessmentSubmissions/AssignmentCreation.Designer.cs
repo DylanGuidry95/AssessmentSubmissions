@@ -37,15 +37,7 @@
             this.saveItem = new System.Windows.Forms.Button();
             this.discard = new System.Windows.Forms.Button();
             this.assignmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.feedBackFormDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.verdict = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.definition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.evidence = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.assignmentView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.assignmentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assignmentView)).BeginInit();
             this.SuspendLayout();
             // 
             // assignmentList
@@ -120,65 +112,6 @@
             this.assignmentBindingSource.DataSource = typeof(AssessmentSubmissions.Assignment);
             this.assignmentBindingSource.CurrentChanged += new System.EventHandler(this.assignmentBindingSource_CurrentChanged);
             // 
-            // gradeDataGridViewTextBoxColumn
-            // 
-            this.gradeDataGridViewTextBoxColumn.DataPropertyName = "Grade";
-            this.gradeDataGridViewTextBoxColumn.HeaderText = "Grade";
-            this.gradeDataGridViewTextBoxColumn.Name = "gradeDataGridViewTextBoxColumn";
-            // 
-            // feedBackFormDataGridViewTextBoxColumn
-            // 
-            this.feedBackFormDataGridViewTextBoxColumn.DataPropertyName = "FeedBackForm";
-            this.feedBackFormDataGridViewTextBoxColumn.HeaderText = "FeedBackForm";
-            this.feedBackFormDataGridViewTextBoxColumn.Name = "feedBackFormDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // verdict
-            // 
-            this.verdict.HeaderText = "Verdict";
-            this.verdict.Name = "verdict";
-            // 
-            // definition
-            // 
-            this.definition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.definition.DataPropertyName = "Name";
-            this.definition.HeaderText = "Definition of Competence";
-            this.definition.Name = "definition";
-            this.definition.Width = 138;
-            // 
-            // evidence
-            // 
-            this.evidence.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.evidence.DataPropertyName = "Name";
-            this.evidence.HeaderText = "Evidence";
-            this.evidence.Name = "evidence";
-            this.evidence.Width = 77;
-            // 
-            // assignmentView
-            // 
-            this.assignmentView.AutoGenerateColumns = false;
-            this.assignmentView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.assignmentView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.evidence,
-            this.definition,
-            this.verdict,
-            this.nameDataGridViewTextBoxColumn,
-            this.feedBackFormDataGridViewTextBoxColumn,
-            this.gradeDataGridViewTextBoxColumn});
-            this.assignmentView.DataSource = this.assignmentBindingSource;
-            this.assignmentView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.assignmentView.Location = new System.Drawing.Point(139, 58);
-            this.assignmentView.Name = "assignmentView";
-            this.assignmentView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.assignmentView.Size = new System.Drawing.Size(450, 384);
-            this.assignmentView.TabIndex = 3;
-            this.assignmentView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.assignmentView_ColumnHeaderMouseClick);
-            // 
             // AssignmentCreation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,14 +121,12 @@
             this.Controls.Add(this.saveItem);
             this.Controls.Add(this.editItem);
             this.Controls.Add(this.newItem);
-            this.Controls.Add(this.assignmentView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.name);
             this.Controls.Add(this.assignmentList);
             this.Name = "AssignmentCreation";
             this.Text = "AssignmentCreation";
             ((System.ComponentModel.ISupportInitialize)(this.assignmentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assignmentView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,12 +142,5 @@
         private System.Windows.Forms.RadioButton editItem;
         private System.Windows.Forms.Button saveItem;
         private System.Windows.Forms.Button discard;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gradeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn feedBackFormDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn verdict;
-        private System.Windows.Forms.DataGridViewTextBoxColumn definition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn evidence;
-        private System.Windows.Forms.DataGridView assignmentView;
     }
 }

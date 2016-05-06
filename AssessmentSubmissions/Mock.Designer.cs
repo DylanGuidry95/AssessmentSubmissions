@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.StudentNames = new System.Windows.Forms.ListBox();
-            this.assignmentLog = new System.Windows.Forms.DataGridView();
-            this.Assignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grade = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Download = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.studentInfo = new System.Windows.Forms.RichTextBox();
             this.Control = new System.Windows.Forms.GroupBox();
@@ -41,9 +37,13 @@
             this.AssignmentEditor = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.editStudent = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.assignmentLog)).BeginInit();
+            this.studentAssignments = new System.Windows.Forms.Panel();
+            this.colOne = new System.Windows.Forms.TextBox();
+            this.colTwo = new System.Windows.Forms.TextBox();
+            this.colThree = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).BeginInit();
             this.Control.SuspendLayout();
+            this.studentAssignments.SuspendLayout();
             this.SuspendLayout();
             // 
             // StudentNames
@@ -57,37 +57,6 @@
             this.StudentNames.TabIndex = 0;
             this.StudentNames.SelectedIndexChanged += new System.EventHandler(this.StudentNames_SelectedIndexChanged);
             this.StudentNames.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StudentNames_MouseDown);
-            // 
-            // assignmentLog
-            // 
-            this.assignmentLog.AutoGenerateColumns = false;
-            this.assignmentLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.assignmentLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Assignment,
-            this.Grade,
-            this.Download});
-            this.assignmentLog.DataSource = this.studentBindingSource;
-            this.assignmentLog.Location = new System.Drawing.Point(139, 74);
-            this.assignmentLog.Name = "assignmentLog";
-            this.assignmentLog.Size = new System.Drawing.Size(599, 311);
-            this.assignmentLog.TabIndex = 1;
-            // 
-            // Assignment
-            // 
-            this.Assignment.HeaderText = "Assignment";
-            this.Assignment.Name = "Assignment";
-            this.Assignment.ReadOnly = true;
-            // 
-            // Grade
-            // 
-            this.Grade.HeaderText = "Grade";
-            this.Grade.Name = "Grade";
-            // 
-            // Download
-            // 
-            this.Download.HeaderText = "Download Url";
-            this.Download.Name = "Download";
-            this.Download.ReadOnly = true;
             // 
             // studentInfo
             // 
@@ -149,22 +118,66 @@
             this.editStudent.UseVisualStyleBackColor = true;
             this.editStudent.Click += new System.EventHandler(this.editStudent_Click);
             // 
+            // studentAssignments
+            // 
+            this.studentAssignments.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.studentAssignments.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.studentAssignments.Controls.Add(this.colThree);
+            this.studentAssignments.Controls.Add(this.colTwo);
+            this.studentAssignments.Controls.Add(this.colOne);
+            this.studentAssignments.Location = new System.Drawing.Point(140, 75);
+            this.studentAssignments.Name = "studentAssignments";
+            this.studentAssignments.Size = new System.Drawing.Size(598, 311);
+            this.studentAssignments.TabIndex = 7;
+            this.studentAssignments.MouseClick += new System.Windows.Forms.MouseEventHandler(this.studentAssignments_MouseClick);
+            // 
+            // colOne
+            // 
+            this.colOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colOne.Location = new System.Drawing.Point(3, 3);
+            this.colOne.Name = "colOne";
+            this.colOne.ReadOnly = true;
+            this.colOne.Size = new System.Drawing.Size(100, 23);
+            this.colOne.TabIndex = 0;
+            this.colOne.Text = "Assignment";
+            // 
+            // colTwo
+            // 
+            this.colTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colTwo.Location = new System.Drawing.Point(109, 3);
+            this.colTwo.Name = "colTwo";
+            this.colTwo.ReadOnly = true;
+            this.colTwo.Size = new System.Drawing.Size(100, 23);
+            this.colTwo.TabIndex = 1;
+            this.colTwo.Text = "Grade";
+            // 
+            // colThree
+            // 
+            this.colThree.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colThree.Location = new System.Drawing.Point(215, 3);
+            this.colThree.Name = "colThree";
+            this.colThree.ReadOnly = true;
+            this.colThree.Size = new System.Drawing.Size(100, 23);
+            this.colThree.TabIndex = 2;
+            this.colThree.Text = "Repository";
+            // 
             // Mock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(750, 500);
+            this.Controls.Add(this.studentAssignments);
             this.Controls.Add(this.editStudent);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Control);
             this.Controls.Add(this.studentInfo);
-            this.Controls.Add(this.assignmentLog);
             this.Controls.Add(this.StudentNames);
             this.Name = "Mock";
             this.Text = "Mock";
-            ((System.ComponentModel.ISupportInitialize)(this.assignmentLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).EndInit();
             this.Control.ResumeLayout(false);
+            this.studentAssignments.ResumeLayout(false);
+            this.studentAssignments.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -172,10 +185,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox StudentNames;
-        private System.Windows.Forms.DataGridView assignmentLog;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Assignment;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Grade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Download;
         private System.Windows.Forms.BindingSource studentBindingSource;
         private System.Windows.Forms.RichTextBox studentInfo;
         private System.Windows.Forms.GroupBox Control;
@@ -184,5 +193,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button editStudent;
+        private System.Windows.Forms.Panel studentAssignments;
+        private System.Windows.Forms.TextBox colOne;
+        private System.Windows.Forms.TextBox colThree;
+        private System.Windows.Forms.TextBox colTwo;
     }
 }

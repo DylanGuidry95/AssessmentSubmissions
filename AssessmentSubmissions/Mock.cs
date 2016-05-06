@@ -12,12 +12,18 @@ namespace AssessmentSubmissions
 {
     public partial class Mock : Form
     {
+        DataGrid dg;
+
         public Mock()
         {
             InitializeComponent();
             Main.ClassInfo = this;
             Main.ClassInfo.Activate();
             Main.HomeScreen.Close();
+            dg = new DataGrid(studentAssignments, this);
+            dg.ColHeaders.Add(colOne);
+            dg.ColHeaders.Add(colTwo);
+            dg.ColHeaders.Add(colThree);
         }
 
         private void StudentNames_MouseDown(object sender, MouseEventArgs e)
@@ -99,14 +105,14 @@ namespace AssessmentSubmissions
 
         private void GenerateAssignmentLog()
         {
-            assignmentLog.Rows.Clear();
-            assignmentLog.Refresh();
-            foreach (Assignment a in Main.CurrentStudent.Assignments)
+
+        }
+
+        private void studentAssignments_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
             {
-                assignmentLog.Rows.Add();
-                assignmentLog.Rows[assignmentLog.Rows.Count].Cells[0].Value = a.Name;
-                assignmentLog.Rows[assignmentLog.Rows.Count].Cells[1].Value = a.Grade;
-                assignmentLog.Rows[assignmentLog.Rows.Count].Cells[0].Value = a.FeedBackForm;
+                dg.Create();
             }
         }
     }

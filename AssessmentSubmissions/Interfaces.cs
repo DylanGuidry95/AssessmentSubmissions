@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AssessmentSubmissions
 {
@@ -44,5 +45,27 @@ namespace AssessmentSubmissions
     public interface ISchoolFactory
     {
         IClass Create(string n);
+    }
+
+    public interface ICell
+    {
+        Form owner { get; set; }
+        float PositionX { get; set; }
+        float PositionY { get; set; }
+        string Data { get; set; }
+        TextBox Textbox { get; set; }
+    }
+
+    public interface IRow
+    {
+        List<ICell> Cells { get; set; }
+    }
+
+    public interface IGridFactory
+    {
+        List<DataGrid.Row> Rows { get; set; }
+        List<TextBox> ColHeaders { get; set; }
+        void CreateColHeader(string n);
+        IRow Create();
     }
 }
